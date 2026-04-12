@@ -1,0 +1,4 @@
+#Qa version of configs
+
+server:
+  port: 8081
