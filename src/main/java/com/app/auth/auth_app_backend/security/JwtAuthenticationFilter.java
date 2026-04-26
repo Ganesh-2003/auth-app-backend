@@ -76,15 +76,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     );
 
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    if(SecurityContextHolder.getContext().getAuthentication() == null){
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
                 });
 
             }catch (ExpiredJwtException e){
-
+                e.printStackTrace();
             }catch (MalformedJwtException e){
-
+                e.printStackTrace();
             }catch (JwtException e){
-
+                e.printStackTrace();
             }catch (Exception e){
                 e.printStackTrace();
             }
