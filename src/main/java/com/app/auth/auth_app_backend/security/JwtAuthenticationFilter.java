@@ -34,17 +34,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String header = request.getHeader("Authorization");
-        if (header != null || !header.startsWith("Bearer ")) {
+        if (header != null && header.startsWith("Bearer ")) {
             //token extract and validate then authentication create and then set inside Security Content
             String token = header.substring(7);
 
-            //Check for access token
-            if(!jwtService.isAccessToken((token)))
-            {
-                filterChain.doFilter(request,response);
-                return ;
-            }
             try{
+                //Check for access token
+                if(!jwtService.isAccessToken((token)))
+                {
+                    filterChain.doFilter(request,response);
+                    return ;
+                }
 
                 Jws<Claims> parse = jwtService.parse(token);
                 Claims payload = parse.getPayload();
@@ -82,16 +82,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 });
 
             }catch (ExpiredJwtException e){
-                e.printStackTrace();
-            }catch (MalformedJwtException e){
-                e.printStackTrace();
-            }catch (JwtException e){
-                e.printStackTrace();
-            }catch (Exception e){
-                e.printStackTrace();
+                request.setAttribute("error", "token expired");
+                //e.printStackTrace();
+            } catch (Exception e){
+                request.setAttribute("error", "token invalid");
+                //e.printStackTrace();
             }
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        return request.getRequestURI().startsWith("/api/v1/auth");
     }
 }

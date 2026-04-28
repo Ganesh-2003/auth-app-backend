@@ -2,6 +2,9 @@ package com.app.auth.auth_app_backend.security;
 
 import com.app.auth.auth_app_backend.entities.Role;
 import com.app.auth.auth_app_backend.entities.User;
+import jakarta.websocket.server.ServerEndpoint;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ import io.jsonwebtoken.security.SignatureException;  // for newer versions
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
+@Getter
+@Setter
 public class JwtService {
 
     private final SecretKey secretKey;
