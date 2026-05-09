@@ -96,7 +96,6 @@ public class JwtService {
         return "access".equals(c.get("typ"));
     }
 
-
     public boolean isRefreshToken(String token) {
         Claims c = parse(token).getPayload();
         return "refresh".equals(c.get("typ"));
