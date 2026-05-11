@@ -55,8 +55,7 @@ public class User implements UserDetails {
     @PreUpdate
     protected void onUpdate() {
         Instant now = Instant.now();
-        if(updated_at == null) updated_at = now;
-        created_at = now;
+        updated_at = now;
     }
 
     @Override
