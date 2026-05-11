@@ -44,8 +44,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                 .requestMatchers("/api/v1/auth/register").permitAll()
                 .requestMatchers("/api/v1/auth/login").permitAll()
-                        .requestMatchers("/api/v1/auth/refresh").permitAll()
-                        .requestMatchers("/api/v1/auth/logout").permitAll()                                                     
+                .requestMatchers("/api/v1/auth/refresh").permitAll()
+                .requestMatchers("/api/v1/auth/logout").permitAll()
+                .requestMatchers(AppConstant.AUTH_PUBLIC_URLS).permitAll()
                 .anyRequest().authenticated()
         )
 
