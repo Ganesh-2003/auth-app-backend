@@ -1,4 +1,4 @@
-package com.app.auth.auth_app_backend.entities;
+package com.substring.auth.app.auth.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +11,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-
+@NoArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role {

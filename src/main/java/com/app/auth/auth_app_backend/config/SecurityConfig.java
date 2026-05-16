@@ -88,10 +88,4 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-/*   @Bean
-//    public UserDetailsService user() {
-//        User.UserBuilder UserBuilder = User.withDefaultPasswordEncoder();
-//
-//
-//    };*/
 }
